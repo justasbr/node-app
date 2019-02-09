@@ -27,8 +27,9 @@ app.use('/square/:number', function(req, res, next) {
 
 app.use('/identity/:number', function(req, res, next) {  
     let number = Number(req.params.number);
-    res.json({"square": functions.identity(number)});
+    res.json({"identity": functions.identity(number)});
 });
 
+console.log("Running");
 
 module.exports = app;
