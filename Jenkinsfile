@@ -24,7 +24,10 @@ pipeline {
         }
         stage("Push docker"){
           steps {
-              sh 'docker push justasbr/node-app-repo:latest'
+               script {
+                    def customImage = docker.build("my-image:${env.BUILD_ID}")
+                    customImage.push()
+                }
            }
         }
    }
