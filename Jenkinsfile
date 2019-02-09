@@ -1,9 +1,8 @@
 pipeline {
-    agent any 
+    agent any
 
     tools {
         nodejs "nodejs"
-        docker "docker"
     }
 
     stages {
@@ -17,10 +16,17 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Build docker image'){
-            steps {
-                sh 'docker build -t node-app .'
+        stage('Build docker'){
+          steps {
+            script {
+              docker.withTool('docker') {
+                  def customImage = docker.build("node-app-image:${env.BUILD_ID}")
+                  customImage.inside {
+			sh 'npm install && npm test'
+		  }
+              }
             }
+          }
         }
     }
 }
