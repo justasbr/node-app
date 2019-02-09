@@ -23,10 +23,7 @@ pipeline {
           }
         }
         stage("Push docker"){
-           steps {
-                sh "docker login"
-                sh "docker push justasbr/node-app-repo:latest"
-          }
+          sh 'docker push justasbr/node-app-repo:latest'
+        }
     }
   }
-}
