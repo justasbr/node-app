@@ -23,12 +23,11 @@ pipeline {
           }
         }
         stage("Push docker"){
-          steps {
-               script {
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
-                    customImage.push()
-                }
-           }
+		steps {
+                  withDockerRegistry([ credentialsId: "<CREDENTIALS_ID>", url: "<PRIVATE_REGISTRY_URL>" ]) {
+	              sh 'docker push justasbr/node-app-repo:latest'
+	          }
+	      }
         }
    }
 }
