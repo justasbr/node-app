@@ -24,7 +24,7 @@ pipeline {
         }
         stage("Push docker"){
 		steps {
-                  withDockerRegistry([ credentialsId: "<CREDENTIALS_ID>", url: "<PRIVATE_REGISTRY_URL>" ]) {
+                  withDockerRegistry([ credentialsId: "dkr", url: "" ]) {
 	              sh 'docker push justasbr/node-app-repo:latest'
 	          }
 	      }
