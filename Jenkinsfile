@@ -18,15 +18,8 @@ pipeline {
         }
         stage('Build docker'){
           steps {
-            script {
-              docker.withTool('docker') {
-                  def customImage = docker.build("node-app-image:${env.BUILD_ID}")
-                  customImage.inside {
-			sh 'npm install && npm test'
-		  }
+                sh "docker build -t node-app-image ."
               }
-            }
-          }
-        }
     }
+  }
 }
