@@ -22,12 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 /* GET home page. */
 app.use('/square/:number', function(req, res, next) {  
   let number = Number(req.params.number);
-  res.json({"square": functions.square(number)});
+  res.json({"square123": functions.square(number)});
 });
 
 app.use('/identity/:number', function(req, res, next) {  
     let number = Number(req.params.number);
-    res.json({"identity": functions.identity(number)});
+    res.json({"identity123": functions.identity(number)});
 });
 
 console.log("Running");
