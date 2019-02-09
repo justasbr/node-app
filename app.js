@@ -2,10 +2,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var express = require('express');
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var functions = require('./functions.js')
 var app = express();
 
 app.use(logger('dev'));
@@ -14,7 +14,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+// app.use('/users', usersRouter);
+
+// var router = express.Router();
+
+/* GET home page. */
+app.use('/square/:number', function(req, res, next) {  
+  let number = Number(req.params.number);
+  res.json({"square": functions.square(number)});
+});
+
+app.use('/identity/:number', function(req, res, next) {  
+    let number = Number(req.params.number);
+    res.json({"square": functions.identity(number)});
+});
+
 
 module.exports = app;
