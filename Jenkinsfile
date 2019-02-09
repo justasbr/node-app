@@ -19,7 +19,13 @@ pipeline {
         stage('Build docker'){
           steps {
                 sh "docker build -t node-app-image ."
-              }
+                sh "docker tag node-app-image:latest justasbr/node-app-repo:latest"
+          }
+        stage("Push docker"){
+           steps {
+                sh "docker push justasbr/node-app-repo:latest"
+          }
+        }
     }
   }
 }
